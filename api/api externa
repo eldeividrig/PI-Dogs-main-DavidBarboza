@@ -1,0 +1,4 @@
+https://api.thedogapi.com/v1/breeds?api_key={live_9FjTqSKCQWqZ5N8Aa8aLaOzqGrE0wGdil1XIBUgaSLQD2OC9MCcaOeOUgyDmm0Z5}
+
+
+https://api.thedogapi.com/v1/breeds/search?q={Affenpinscher}?api_key={live_9FjTqSKCQWqZ5N8Aa8aLaOzqGrE0wGdil1XIBUgaSLQD2OC9MCcaOeOUgyDmm0Z5}
