@@ -1,41 +1,33 @@
-// import "./Home.css";
-// import foto from "../img/dogimg.png";
-// import { Link } from "react-router-dom";
-import React from 'react';
-
-// export const Home = () => {
-//   return (
-//     <div>All about dogs</div>
-//   )
-// }
-
-// export default Home;
-
 import "./Home.css";
-import { Link } from 'react-router-dom';
+import foto from "../img/Group 9.png";
+import { Link } from "react-router-dom";
+import React from "react";
 
-function Home() {
-    return (
-        <div className= "fondo-home">
-            <div className= "div-container-home">
-                <div className= "foto-perrito-container">
-                    {/* <img className= "foto-perrito-home" src= {FotoPerrito}></img> */}
-                </div>
-                {/* <div>
-                    <img src= {rectangulo}></img> 
-                </div> */}
-                <div className= "contenedor-titulo-home">
-                    <div className= "titulo-home-container">
-                        <p className= "titulo-home">All about dogs</p>
-                    </div> 
-                    <div className= "subtitulo-home-container">
-                        <p className= "subtitulo-home">Toda la información sobre perros que buscas, está acá.</p>
-                        <Link to= "/buscar"><button className= "boton-home">ver más</button> </Link>                      
-                    </div>
-                </div>
-            </div>
+export const Home = () => {
+  return (
+    <div className="fondoHome">
+      <div className="containerHome">
+        <div className="photoDog">
+          <img className="photoDogHome" src={foto} alt="Foto Perro Home"/>
         </div>
-    )
-}
+      </div>
+      <div className="tittleHome">
+        <div className="containerTittle">
+          <p className="tittle">Todas las Razas</p>
+        </div>
+        
+          <div className="containerSubtittle">
+            <p className="subtittle">
+              Entrá aca para ver toda la Información de las razas de perros
+            </p>
+            <Link to="/buscar">
+              <button className="button">Entrar</button>
+            </Link>
+          </div>
+        
+      </div>
+    </div>
+  );
+};
 
 export default Home;
