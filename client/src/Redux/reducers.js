@@ -21,7 +21,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         razadogs: action.payload,
       };
-    case "ordenar-liviano-pesado":
+    case "ordenarLiviano":
       return {
         ...state,
         dogs: state.dogs.sort(
@@ -30,7 +30,7 @@ function rootReducer(state = initialState, action) {
             parseInt(b.weight.metric.slice(0, 3))
         ),
       };
-    case "ordenar-pesado-liviano":
+    case "ordenarPesado":
       return {
         ...state,
         dogs: state.dogs.sort(
