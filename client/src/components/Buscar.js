@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import SearchBar from "./SearchBar";
 import axios from "axios";
+import DogCard from "./DogCard";
 
 export default function Buscar() {
   const dispatch = useDispatch();
@@ -49,7 +50,7 @@ export default function Buscar() {
       dispatch({
         type: "ordenarLiviano",
       });
-    }else if (e.target.value === "pesado"){
+    } else if (e.target.value === "pesado") {
       dispatch({
         type: "ordenarPesado",
       })
@@ -62,7 +63,7 @@ export default function Buscar() {
       dispatch({
         type: "ordenar-asc-desc",
       });
-    }else if (e.target.value === "desc-asc"){
+    } else if (e.target.value === "desc-asc") {
       dispatch({
         type: "ordenar-desc-asc",
       })
@@ -80,8 +81,9 @@ export default function Buscar() {
     setRazaSelect(raza);
   }
 
-  const indexUltimoItem = currentPage *itemPorPag;
+  const indexUltimoItem = currentPage * itemPorPag;
   const indexPrimerItem = indexUltimoItem - itemPorPag;
+  let url = 'https://e7.pngegg.com/pngimages/552/1/png-clipart-dogs-dogs.png';
 
   return (
     <div className="fondo">
@@ -94,7 +96,7 @@ export default function Buscar() {
             </Link>
           </div>
         </div>
-        <div containerSelect>
+        <div className="containerSelect">
           <div className="selectContainer">
             <p>Ordenar por peso:</p>
             <select value={peso} onChange={pesoSelectedChange}>
@@ -114,7 +116,7 @@ export default function Buscar() {
             <select onChange={temperamentChange}>
               <option value={""}>Seleccionar Temperamento</option>
               {temperaments.map(e => (
-                <option value={e.name}>{e.name}</option>
+                <option value={e.name} key={e.id}>{e.name}</option>
               ))}
             </select>
           </div>
@@ -122,14 +124,28 @@ export default function Buscar() {
             <p>Filtrar por Raza:</p>
             <select onChange={razaChange}>
               <option value={""}>Seleccionar Raza</option>
-              {razadogs.map(e=>(
-                <option value={e.name}>{e.name}</option>
+              {razadogs.map(e => (
+                <option value={e.name} key={e.id}>{e.name}</option>
               ))}
             </select>
           </div>
         </div>
       </div>
-      <div>Lista de Razas</div>
+      <div className="dogsContainer"> 
+        
+        {!tempSelect && !razaSelect &&
+          dogs
+            .slice(indexPrimerItem, indexUltimoItem)
+            .map((dog) => (               
+                           
+              <DogCard                                 
+                img={dog.image?.url || url}
+                name={dog.name}
+                temperament={dog.temperament}
+                id={dog.id}
+              />              
+            ))}
+      </div>
       <div>
         Paginacion
       </div>

@@ -2,6 +2,40 @@ const axios = require("axios");
 const app = require("express").Router();
 const { Op, Dog, Temperament } = require("../db");
 
+
+app.get("/search-dogs", async function (req, res) {
+  let misperros = await Dog.findAll()
+  let misperrosParse = []    
+  for (let i = 0; i < misperros.length; i++) {
+      let perrito = misperros[i];
+      let temperaments = await perrito.getTemperaments() 
+      perrito = perrito.dataValues;
+      temperaments = temperaments.map((el) => el.dataValues.name)
+      perrito.temperament = temperaments.toString()
+      misperrosParse.push(perrito)
+  }
+  axios.get(`https://api.thedogapi.com/v1/breeds`)
+      .then(respuesta => {
+          let resultado = [...misperrosParse, ...respuesta.data].filter((el) => 
+              el.name.toLowerCase().includes(req.query.name.toLowerCase()))
+          if (resultado.length === 0) {
+              res.send([])
+          }
+          if(resultado.length > 0 && resultado.length < 9) {
+              res.send(resultado)
+          }
+          else if(resultado.length > 8) {
+              let nuevoarray = resultado.slice(0, 8)
+              res.send(nuevoarray)
+          } 
+          res.end()
+      })        
+      .catch(error => {
+          console.log(error)
+
+      })
+})
+
 app.get("/dogs", async (req, res) => {
   let { name } = req.query;
   let dogs = await Dog.findAll();
