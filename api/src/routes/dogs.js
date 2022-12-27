@@ -105,8 +105,10 @@ app.get("/dogs/:id", async (req, res) => {
 
 
 app.post("/dogs", async (req, res) => {
-  const { temperamentId } = req.body;
+  const { temperamentsId } = req.body;
+  console.log(temperamentsId);
   const { name, altura, peso, años } = req.body;
+  console.log(name);
   if (!name || !altura || !peso) return res.status(404).send('Falta enviar datos obligatorios');
   let dog = await Dog.findAll({
     where: {
@@ -125,8 +127,8 @@ app.post("/dogs", async (req, res) => {
       años: req.body.años,
       id: Date.parse(new Date)
     });
-    console.log(temperamentId);
-    gos.setTemperaments(temperamentId);
+    console.log(temperamentsId);
+    gos.setTemperaments(temperamentsId);
     res.status(200).json(gos);
   } catch (error) {
     res.status(404).send('Error en alguno de los datos provistos');
