@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import SearchBar from "./SearchBar";
 import axios from "axios";
 import DogCard from "./DogCard";
+import { Paginacion } from "./Paginacion";
 
 export default function Buscar() {
   const dispatch = useDispatch();
@@ -131,23 +132,23 @@ export default function Buscar() {
           </div>
         </div>
       </div>
-      <div className="dogsContainer"> 
-        
+      <div className="dogsContainer">
+        {razadogs.length}
         {!tempSelect && !razaSelect &&
           dogs
             .slice(indexPrimerItem, indexUltimoItem)
-            .map((dog) => (               
-                           
-              <DogCard                                 
+            .map((dog) => (
+
+              <DogCard
                 img={dog.image?.url || url}
                 name={dog.name}
                 temperament={dog.temperament}
                 id={dog.id}
-              />              
-            ))}
+              />
+            ))}        
       </div>
       <div>
-        Paginacion
+        <Paginacion itemsPorPag={itemPorPag} totalPosts={dogs.length} paginate={setCurrentPage} />
       </div>
     </div>
   );
